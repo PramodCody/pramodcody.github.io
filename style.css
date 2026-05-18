@@ -1,0 +1,15 @@
+
+#top_panel {
+    display: flex;
+    justify-content: left;
+    gap: 10px; /*distance between menu and pramodcody*/
+}
+
+#menu_button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+}
