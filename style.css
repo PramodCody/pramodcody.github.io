@@ -13,6 +13,62 @@
     display: flex;
     align-items: center;
 }
-#menu_button:active {
-    box-shadow: 0 0 5px rgba(0,0,0,0.4);
+
+
+
+
+
+#project_topic {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#project_topic img {
+    width: 20%;
+    max-width: 200px;
+    height: auto;
+}
+
+#project_topic h2 {
+    margin-top: -10px;
+    color: rgb(203, 27, 209);
+}
+
+
+
+
+#download_apk {
+    margin-top : 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#download_apk h3 {
+    margin: 0px;
+}
+#download_apk img {
+    width: 20%;
+    height: auto;
+    background-color: white;
+    border: none
+}
+
+
+
+
+
+#classium_screenshots {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#classium_screenshots img {
+    width: 60%;
+    height: auto;
 }
