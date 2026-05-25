@@ -1,0 +1,16 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+#navbar {
+    width: calc(100vw - 40px); /*- is equal to 2*margin*/
+    height: 70px;
+    background-color: whitesmoke;
+
+    position: fixed;
+    margin: 20px;
+
+    border: 2px solid black;
+}
