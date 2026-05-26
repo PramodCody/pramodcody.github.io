@@ -4,7 +4,6 @@
     margin: 0px;
     padding: 0px;
     user-select: none;
-
 }
 
 
@@ -14,7 +13,7 @@
     height: 50px;
     background-color: whitesmoke;
 
-    position: fixed;
+    position: absolute;
     margin: 20px;
 
     border: 2px solid white;

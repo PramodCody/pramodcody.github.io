@@ -1,5 +1,6 @@
 #footers {
-    padding: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     padding-right: 20px; /*to make it somehow in middle*/
     margin-top: 20px;
     /* background-color: rebeccapurple; */
@@ -8,7 +9,7 @@
     align-items: center;
 
     background-color: white;
-    border-top: 1px solid black;
+    border-top: 1px solid rgba(0,0,0,0.5);
 }
 
 #footers a {
