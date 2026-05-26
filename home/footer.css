@@ -1,0 +1,27 @@
+#footers {
+    padding: 10px;
+    padding-right: 20px; /*to make it somehow in middle*/
+    margin-top: 20px;
+    /* background-color: rebeccapurple; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: white;
+    border-top: 1px solid black;
+}
+
+#footers a {
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.footer {
+    padding: 2px;
+}
+

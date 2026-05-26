@@ -3,6 +3,8 @@
 
 #kids_classium_logo {
     padding-top: 5vh; /* margin-top is collapsing with margin of navbar*/
+    position: relative;
+    top: -20px;
     
     display: flex;
     flex-direction: column;
