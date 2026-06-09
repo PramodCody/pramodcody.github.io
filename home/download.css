@@ -111,5 +111,5 @@
 
 .fade-in-out-active {
     /* 2s total duration: 1s to fade in, 1s to fade out */
-    animation: fadeInOut 1s ease-in-out forwards; 
+    animation: fadeInOut 2s ease-in-out forwards; 
 }

@@ -1,3 +1,12 @@
+.site-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1 0 auto; /* Forces the footer to the bottom, allowing it to push up/down */
+}
+
 #footers {
     padding-top: 2px;
     padding-bottom: 2px;
@@ -6,7 +15,7 @@
     /* background-color: rebeccapurple; */
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: start;
 
     background-color: white;
     border-top: 1px solid rgba(0,0,0,0.5);
