@@ -23,7 +23,7 @@
 
    width: 90vw;
    gap: 32px;
-   margin-left: 10px;
+   margin-left: 16px; /*gap/2*/
 }
 .screenshot {
     width: 120px;
