@@ -85,7 +85,6 @@
     top: -40px;
 
     opacity: 0;
-    visibility: hidden;
 }
 @media (min-width: 1024px) {
     #downloading {
@@ -94,22 +93,23 @@
     }
 }
 
+
 @keyframes fadeInOut {
     0% {
         opacity: 0;
-        visibility: hidden;
     }
-    50% {
-        opacity: 1;
-        visibility: visible;
+    20% {
+        opacity: 1; /* Fully visible at 1s */
+    }
+    90% {
+        opacity: 1; /* Holds visibility until 4s */
     }
     100% {
-        opacity: 0;
-        visibility: hidden;
+        opacity: 0; /* Fully faded out at 5s */
     }
 }
 
 .fade-in-out-active {
-    /* 2s total duration: 1s to fade in, 1s to fade out */
-    animation: fadeInOut 3s ease-in-out forwards; 
+    /* 5s total duration: 1s fade in (20%), 3s hold (60%), 1s fade out (20%) */
+    animation: fadeInOut 4s ease-in-out forwards; 
 }

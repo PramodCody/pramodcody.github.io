@@ -15,7 +15,7 @@ download_button.onclick = () => {
     const link = document.createElement('a');
     
     // Set the path to the asset
-    link.href = 'assets/Kids_Classium.apk';
+    link.href = 'assets/Kids Classium.apk';
     
     // Specify the filename for the download
     link.download = 'Kids Classium.apk';
