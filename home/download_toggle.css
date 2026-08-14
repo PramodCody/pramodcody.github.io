@@ -54,13 +54,21 @@
   font-weight:700;
   font-size:14px;
   color:var(--ink);
-  opacity:0.55;                 /* inactive buttons are dimmed */
+  opacity:1;                 /* inactive buttons are dimmed */
   transition: background 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
 }
 
 .platform-btn:hover{
-  opacity:0.85;
   transform:translateY(-1px);
+}
+.platform-btn {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .platform-btn:hover {
+    transform: translateY(-1px);
+  }
 }
 
 /* keyboard accessibility */
@@ -76,7 +84,7 @@
   background:var(--accent-soft);
   color:var(--accent);
   opacity:1;
-  border-radius:8px;
+  border-radius:999px;
 }
 
 .platform-btn svg{
@@ -92,7 +100,7 @@
 /* ===================================================================
    Mobile: show logos only, hide platform name text
    =================================================================== */
-@media (max-width: 520px){
+/* @media (max-width: 520px){
   .platform-name{
     display:none;
   }
@@ -102,4 +110,4 @@
   #platform_toggle{
     gap:2px;
   }
-}
+} */

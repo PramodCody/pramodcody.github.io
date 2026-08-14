@@ -1,8 +1,7 @@
-#download {
+#download_bar {
 
     /*box definition*/
     position: relative;
-    top: -80px;
     width: auto;
     height: 60px;
 
