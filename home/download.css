@@ -79,6 +79,7 @@
     text-align: center;
 
     margin: 0 auto; /*arranges the div in middle somehow*/
+    margin-top: 20px;
     
     position: relative;
     top: -40px;
