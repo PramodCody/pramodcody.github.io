@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 
 
-#kids_classium_logo {
+#logo_bar {
     width: 100vw;
     height: 40%;
     padding-top: 5vh; /* margin-top is collapsing with margin of navbar*/
@@ -16,7 +16,7 @@
     /* background-color: blue; */
 }
 @media (min-width: 1024px) {
-    #kids_classium_logo {
+    #logo_bar {
         width: 80vw;
         position: relative;
         left: 10%;
@@ -26,25 +26,29 @@
     }
 }
 
+/*managing in which order should they allign horizentally in pc (in mobile default is ok*/
+@media (min-width: 1024px) {
+    #logo_bar h2 {
+        order: 1;
+    }
+    #logo_bar img {
+        order: 2;
+    }
+    #logo_bar #play {
+        order: 3;
+    }
+}
 
-
-
-#kids_classium_logo img {
+#logo_bar img {
     transform: scale(0.5, 0.5);
     filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.5));
 }
-@media (min-width: 1024px) {
-    #kids_classium_logo img {
-        transform: scale(0.6, 0.6);
-        order: 2;
-    }
-}
-#kids_classium_logo img:hover{
+#logo_bar img:hover{
     filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
 }
 
 
-#kids_classium_logo h2 {
+#logo_bar h2 {
 
     /*Positioning the App Name*/
     margin: 0px;
@@ -62,7 +66,7 @@
     /* -webkit-text-stroke: 1px white; */
 }
 @media (min-width: 1024px) {
-    #kids_classium_logo h2 {
+    #logo_bar h2 {
         display: inline;
         top: 0px;
         text-align: center;
