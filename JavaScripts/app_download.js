@@ -13,11 +13,14 @@
 (function () {
     "use strict";
 
-    // Map each platform to its file in assets/apps/
+    // Map each platform to its GitHub release asset
+    const RELEASE_BASE =
+        "https://github.com/PramodCody/Kids_Classium/releases/latest/download/";
+
     const APP_FILES = {
-        android: "assets/apps/Kids Classium.apk",
-        windows: "assets/apps/Kids Classium.exe",
-        linux: "assets/apps/Kids Classium.x86_64",
+        android: RELEASE_BASE + "Kids.Classium.apk",
+        windows: RELEASE_BASE + "Kids.Classium.exe",
+        linux: RELEASE_BASE + "Kids.Classium.x86_64",
     };
 
     const DEFAULT_PLATFORM = "android";
@@ -45,26 +48,24 @@
         downloadingSignal.classList.remove("fade-in-out-active");
         void downloadingSignal.offsetWidth; // force reflow to restart animation
         downloadingSignal.classList.add("fade-in-out-active");
-        console.log("fade in out")
     }
-    
 
     // ---- Trigger a file download --------------------------------
     function downloadApp(platform) {
-        const filePath = APP_FILES[platform];
+        const fileUrl = APP_FILES[platform];
 
-        if (!filePath) {
+        if (!fileUrl) {
             console.warn(`app_download.js: no file mapped for "${platform}"`);
             return;
         }
 
-        if (platform === "android") {
-            triggerFadeOut();
-        }
+        triggerFadeOut();
 
+        // GitHub release assets are served from a different origin
+        // and already send Content-Disposition: attachment, so a
+        // plain link click is enough to trigger the download.
         const link = document.createElement("a");
-        link.href = encodeURI(filePath);
-        link.download = filePath.substring(filePath.lastIndexOf("/") + 1);
+        link.href = fileUrl;
         document.body.appendChild(link);
         link.click();
         link.remove();
