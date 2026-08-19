@@ -1,0 +1,7 @@
+body {
+    /* Alternative syntax for broader compatibility */
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 50%, #e0f7fa 100%);
+    
+    /* Ensuring the background covers the full viewport height */
+    min-height: 100vh;
+}

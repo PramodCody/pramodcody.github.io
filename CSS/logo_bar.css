@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+
+#logo_bar {
+    width: 100vw;
+    height: 40%;
+    padding-top: 5vh; /* margin-top is collapsing with margin of navbar*/
+    position: relative;
+    top: -20px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* background-color: blue; */
+}
+@media (min-width: 1024px) {
+    #logo_bar {
+        width: 80vw;
+        position: relative;
+        left: 10%;
+        top: 20px;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+/*managing in which order should they allign horizentally in pc (in mobile default is ok*/
+@media (min-width: 1024px) {
+    #logo_bar h2 {
+        order: 1;
+    }
+    #logo_bar img {
+        order: 2;
+    }
+    #logo_bar #play {
+        order: 3;
+    }
+}
+
+#logo_bar img {
+    transform: scale(0.5, 0.5);
+    filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.5));
+}
+#logo_bar img:hover{
+    filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
+}
+
+
+#logo_bar h2 {
+
+    /*Positioning the App Name*/
+    margin: 0px;
+    position: relative;
+    top: -90px;
+
+    /*Resizing the App Name*/
+    font-size: 40px;
+    font-family: 'Fredoka';
+    font-weight: 550;
+
+    /*Styling the Font*/
+    color: rgb(47, 14, 69);
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+    /* -webkit-text-stroke: 1px white; */
+}
+@media (min-width: 1024px) {
+    #logo_bar h2 {
+        display: inline;
+        top: 0px;
+        text-align: center;
+        order: -1;
+        font-size: 50px;
+    }
+}
+
+

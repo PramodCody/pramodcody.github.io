@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PramodCody</title>
     <link rel="icon" type="image/png" sizes="32*32" href="assets/github_profile.png">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="background.css">
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="home/logo_bar.css">
-    <link rel="stylesheet" href="home/download.css">
-    <link rel="stylesheet" href="home/download_toggle.css">
-    <link rel="stylesheet" href="home/play.css">
-    <link rel="stylesheet" href="home/screenshots.css">
-    <link rel="stylesheet" href="home/footer.css">
+    <link rel="stylesheet" href="CSS/background.css">
+    <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/logo_bar.css">
+    <link rel="stylesheet" href="CSS/download.css">
+    <link rel="stylesheet" href="CSS/download_toggle.css">
+    <link rel="stylesheet" href="CSS/play.css">
+    <link rel="stylesheet" href="CSS/screenshots.css">
+    <link rel="stylesheet" href="CSS/footer.css">
     <!-- Material icon used by the existing download button -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" />
     <!-- Font used by the platform toggle labels -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Toggle-only styles. Your existing CSS for #download_bar stays wherever it already lives. -->
-    <link rel="stylesheet" href="download_bar.css">
 
 </head>
+
 <body>
 
     <div>
-        <div class="rod" id="rod1" ></div>
-        <div class="rod" id="rod2" ></div>
+        <div class="rod" id="rod1"></div>
+        <div class="rod" id="rod2"></div>
     </div>
     <div id="navbar">
         <div>
@@ -63,7 +64,7 @@
          your real download-link logic.
          ======================================================= -->
     <div id="platform_toggle" role="radiogroup" aria-label="Choose your platform">
-    
+
         <button class="platform-btn" data-platform="android" role="radio" aria-checked="false">
             <svg viewBox="0 3 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -75,7 +76,7 @@
             </svg>
             <span class="platform-name">Android</span>
         </button>
-    
+
         <button class="platform-btn" data-platform="windows" role="radio" aria-checked="false">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 5.6L10.3 4.6V11.3H3V5.6Z" fill="#00A4EF" />
@@ -85,59 +86,59 @@
             </svg>
             <span class="platform-name">Windows</span>
         </button>
-    
+
         <button class="platform-btn" data-platform="linux" role="radio" aria-checked="false">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <title>Linux Penguin</title>
-        
+
                 <!-- soft shadow -->
                 <ellipse cx="100" cy="185" rx="55" ry="8" fill="#000000" opacity="0.12" />
-        
+
                 <!-- feet -->
                 <path d="M75 178 Q70 190 55 190 Q50 190 52 184 Q58 178 68 176 Z" fill="#F5A623" />
                 <path d="M125 178 Q130 190 145 190 Q150 190 148 184 Q142 178 132 176 Z" fill="#F5A623" />
-        
+
                 <!-- body (black) -->
                 <path d="M100 20
                    C130 20 148 55 148 100
                    C148 150 128 182 100 182
                    C72 182 52 150 52 100
                    C52 55 70 20 100 20 Z" fill="#1A1A1A" />
-        
+
                 <!-- belly (white) -->
                 <path d="M100 55
                    C120 55 130 85 130 115
                    C130 150 116 168 100 168
                    C84 168 70 150 70 115
                    C70 85 80 55 100 55 Z" fill="#FFFFFF" />
-        
+
                 <!-- wings -->
                 <path d="M52 90 Q35 110 42 150 Q50 160 58 150 Q52 120 60 95 Z" fill="#1A1A1A" />
                 <path d="M148 90 Q165 110 158 150 Q150 160 142 150 Q148 120 140 95 Z" fill="#1A1A1A" />
-        
+
                 <!-- eye patches (white) -->
                 <ellipse cx="83" cy="62" rx="14" ry="16" fill="#FFFFFF" />
                 <ellipse cx="117" cy="62" rx="14" ry="16" fill="#FFFFFF" />
-        
+
                 <!-- eyes -->
                 <circle cx="86" cy="64" r="5" fill="#2E86DE" />
                 <circle cx="114" cy="64" r="5" fill="#2E86DE" />
                 <circle cx="87.5" cy="62.5" r="1.6" fill="#FFFFFF" />
                 <circle cx="115.5" cy="62.5" r="1.6" fill="#FFFFFF" />
-        
+
                 <!-- beak -->
                 <path d="M92 78 L108 78 L100 92 Z" fill="#F5A623" />
-        
+
                 <!-- cheeks blush -->
                 <ellipse cx="75" cy="75" rx="5" ry="3" fill="#FF8A80" opacity="0.6" />
                 <ellipse cx="125" cy="75" rx="5" ry="3" fill="#FF8A80" opacity="0.6" />
             </svg>
-        
+
             <span class="platform-name">Linux</span>
         </button>
-    
+
     </div>
-    
+
     <!-- =======================================================
          Download bar — your original markup, unchanged.
          Its styling and click behavior are handled by your
@@ -152,12 +153,6 @@
         </div>
     </div>
 
-    <!-- Platform toggle logic now lives in platform_toggle.js -->
-    <script src="platform_toggle.js"></script>
-
-    
-
-
     <div id="downloading">Wait a Second.....</div>
 
 
@@ -165,12 +160,12 @@
         <p>A World Of Adventure and Learning</p>
     </div>
     <div id="screenshots">
-        <img class="screenshot" src="screenshots/screenshot1.webp" alt="screenshot1">
-        <img class="screenshot" src="screenshots/screenshot2.webp" alt="screenshot2">
-        <img class="screenshot" src="screenshots/screenshot3.webp" alt="screenshot3">
-        <img class="screenshot" src="screenshots/screenshot4.webp" alt="screenshot4">
-        <img class="screenshot" src="screenshots/screenshot5.webp" alt="screenshot5">
-        <img class="screenshot" src="screenshots/screenshot6.webp" alt="screenshot6">
+        <img class="screenshot" src="assets/screenshots/screenshot1.webp" alt="screenshot1">
+        <img class="screenshot" src="assets/screenshots/screenshot2.webp" alt="screenshot2">
+        <img class="screenshot" src="assets/screenshots/screenshot3.webp" alt="screenshot3">
+        <img class="screenshot" src="assets/screenshots/screenshot4.webp" alt="screenshot4">
+        <img class="screenshot" src="assets/screenshots/screenshot5.webp" alt="screenshot5">
+        <img class="screenshot" src="assets/screenshots/screenshot6.webp" alt="screenshot6">
     </div>
 
 
@@ -186,5 +181,8 @@
 
 
 </body>
-    <script src="download.js" defer></script>
+<script src="JavaScripts/app_download.js"></script>
+<!-- Platform toggle logic now lives in platform_toggle.js -->
+<script src="JavaScripts/platform_toggle.js"></script>
+
 </html>

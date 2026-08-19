@@ -1,0 +1,70 @@
+#play {
+
+    /*box definition*/
+    position: relative;
+    top: -80px;
+    width: auto;
+    height: 60px;
+
+    /*box arrangement*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (min-width: 1024px) {
+    #play {
+        display: inline-block;
+        top: 0px;
+        order: 3;
+    }
+}
+
+
+
+#play button {
+    
+    /*box definition*/
+    border: none;
+    width: 280px;
+    height: 56px;
+
+    /*making box beautiful*/
+    border-radius: 20px;
+    background: linear-gradient(90deg, #3b164d 0%, #3e73b2 100%);
+    box-shadow: 0px 6px 3px;
+
+
+    /*arrangement of play img and tex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#play button span {
+    font-size: 40px;
+    margin-right: 10px;
+    color: white;
+}
+
+#play button p {
+    font-size: 32px;
+    font-family:Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    #play button:hover {
+        box-shadow: 0px 6px 5px;
+    }
+}
+
+#play button:active {
+    transform: scale(0.99, 0.99);
+    box-shadow: 0px 4px 3px;
+}
+
+#play a {
+    text-decoration: none;
+    color: inherit;
+}
