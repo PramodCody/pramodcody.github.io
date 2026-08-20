@@ -41,6 +41,7 @@
     if (!downloadLink) {
         downloadLink = document.createElement("a");
         downloadLink.id = "download_link";
+        downloadLink.rel = "noreferrer"; // don't send a Referer header to GitHub
         downloadLink.style.display = "contents"; // don't affect layout
         // Move the existing button(s) inside the bar into this anchor
         // so the whole clickable area is a real link.
@@ -72,7 +73,6 @@
         downloadLink.href = fileUrl;
     }
 
-    // ---- "Wait a second..." fade animation (Android only) -------
     function triggerFadeOut() {
         if (!downloadingSignal) return;
         downloadingSignal.classList.remove("fade-in-out-active");
@@ -85,7 +85,7 @@
 
     // ---- Show the fade cue on real click, don't block navigation -
     downloadLink.addEventListener("click", () => {
-        if (getSelectedPlatform() === "android") triggerFadeOut();
+        triggerFadeOut();
         // No preventDefault(): let the browser handle the anchor
         // click natively, straight to its download manager.
     });
