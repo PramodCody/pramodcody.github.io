@@ -3,27 +3,20 @@
    Downloads the correct Kids Classium build based on whichever
    platform button (Android / Windows / Linux) is currently
    selected in #platform_toggle.
-
-   Depends on markup from index.html:
-     - buttons: .platform-btn[data-platform="android|windows|linux"]
-       inside #platform_toggle, toggled via aria-checked
-     - download trigger: #download_bar (wraps a real <a id="download_link">)
    ========================================================== */
 
 (function () {
     "use strict";
 
-    // Map each platform to its GitHub release asset
     const RELEASE_BASE =
         "https://github.com/PramodCody/Kids_Classium/releases/latest/download/";
 
+    // Store both the URL and the target filename for the Blob download
     const APP_FILES = {
-        android: RELEASE_BASE + "Kids.Classium.apk",
-        windows: RELEASE_BASE + "Kids.Classium.exe",
-        linux: RELEASE_BASE + "Kids.Classium.x86_64",
+        android: { url: RELEASE_BASE + "Kids.Classium.apk", fileName: "Kids.Classium.apk" },
+        windows: { url: RELEASE_BASE + "Kids.Classium.exe", fileName: "Kids.Classium.exe" },
+        linux: { url: RELEASE_BASE + "Kids.Classium.x86_64", fileName: "Kids.Classium.x86_64" },
     };
-
-    const DEFAULT_PLATFORM = "android";
 
     const platformToggle = document.getElementById("platform_toggle");
     const downloadBar = document.getElementById("download_bar");
@@ -32,19 +25,12 @@
     if (!platformToggle || !downloadBar) return;
 
     // ---- Get or create the persistent download link -------------
-    // A real <a> that lives in the DOM the whole time. We just keep
-    // its href in sync with the selected platform. Letting the user
-    // click a genuine anchor (rather than a JS-synthesized one that
-    // gets created/clicked/removed in the same tick) is the most
-    // reliable way to get a clean browser-native download handoff.
     let downloadLink = document.getElementById("download_link");
     if (!downloadLink) {
         downloadLink = document.createElement("a");
         downloadLink.id = "download_link";
-        downloadLink.rel = "noreferrer"; // don't send a Referer header to GitHub
-        downloadLink.style.display = "contents"; // don't affect layout
-        // Move the existing button(s) inside the bar into this anchor
-        // so the whole clickable area is a real link.
+        downloadLink.style.display = "contents"; 
+        
         while (downloadBar.firstChild) {
             downloadLink.appendChild(downloadBar.firstChild);
         }
@@ -53,43 +39,69 @@
 
     // ---- Track the currently selected platform -----------------
     function getSelectedPlatform() {
-        const activeBtn = platformToggle.querySelector(
+        let activeBtn = platformToggle.querySelector(
             '.platform-btn[aria-checked="true"]'
         );
-        return (activeBtn && activeBtn.dataset.platform) || DEFAULT_PLATFORM;
+        
+        // FIX: If no button is active on load, default to the first one available
+        if (!activeBtn) {
+            activeBtn = platformToggle.querySelector('.platform-btn');
+            if (activeBtn) {
+                activeBtn.setAttribute('aria-checked', 'true');
+            }
+        }
+        
+        return activeBtn ? activeBtn.dataset.platform : "android"; // Fallback to android
     }
 
-    // ---- Keep the link's href pointed at the right file ----------
-    function updateDownloadLink() {
-        const platform = getSelectedPlatform();
-        const fileUrl = APP_FILES[platform];
-
-        if (!fileUrl) {
-            console.warn(`app_download.js: no file mapped for "${platform}"`);
-            downloadLink.removeAttribute("href");
-            return;
-        }
-
-        downloadLink.href = fileUrl;
+    // ---- Fetch file as Blob to bypass cross-origin redirects ---
+    function triggerBlobDownload(url, fileName) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error("Network response failed");
+                return response.blob();
+            })
+            .then(blob => {
+                const blobUrl = URL.createObjectURL(blob);
+                const tempLink = document.createElement("a");
+                tempLink.href = blobUrl;
+                tempLink.download = fileName;
+                document.body.appendChild(tempLink);
+                tempLink.click();
+                
+                // Cleanup
+                document.body.removeChild(tempLink);
+                URL.revokeObjectURL(blobUrl);
+            })
+            .catch(err => {
+                console.error("Download failed, falling back to direct link:", err);
+                window.location.href = url; // Fallback Native routing
+            });
     }
 
     function triggerFadeOut() {
         if (!downloadingSignal) return;
         downloadingSignal.classList.remove("fade-in-out-active");
-        void downloadingSignal.offsetWidth; // force reflow to restart animation
+        void downloadingSignal.offsetWidth; // force reflow
         downloadingSignal.classList.add("fade-in-out-active");
     }
 
-    // ---- Wire up platform switching to keep href fresh -----------
-    platformToggle.addEventListener("click", updateDownloadLink);
-
-    // ---- Show the fade cue on real click, don't block navigation -
-    downloadLink.addEventListener("click", () => {
+    // ---- Show fade cue and intercept the real click -------------
+    downloadLink.addEventListener("click", (e) => {
+        e.preventDefault(); // Stop standard <a> navigation
         triggerFadeOut();
-        // No preventDefault(): let the browser handle the anchor
-        // click natively, straight to its download manager.
+        
+        const platform = getSelectedPlatform();
+        const fileData = APP_FILES[platform];
+
+        if (fileData) {
+            triggerBlobDownload(fileData.url, fileData.fileName);
+        } else {
+            console.warn(`No mapped file for platform: ${platform}`);
+        }
     });
 
-    // ---- Set the initial href on page load ------------------------
-    updateDownloadLink();
+    // ---- Initialize the UI state on load ------------------------
+    // Ensure the default button is marked correctly on initialization
+    getSelectedPlatform(); 
 })();
