@@ -7,7 +7,7 @@
    Depends on markup from index.html:
      - buttons: .platform-btn[data-platform="android|windows|linux"]
        inside #platform_toggle, toggled via aria-checked
-     - download trigger: #download_bar button (or #download)
+     - download trigger: #download_bar (wraps a real <a id="download_link">)
    ========================================================== */
 
 (function () {
@@ -31,6 +31,25 @@
 
     if (!platformToggle || !downloadBar) return;
 
+    // ---- Get or create the persistent download link -------------
+    // A real <a> that lives in the DOM the whole time. We just keep
+    // its href in sync with the selected platform. Letting the user
+    // click a genuine anchor (rather than a JS-synthesized one that
+    // gets created/clicked/removed in the same tick) is the most
+    // reliable way to get a clean browser-native download handoff.
+    let downloadLink = document.getElementById("download_link");
+    if (!downloadLink) {
+        downloadLink = document.createElement("a");
+        downloadLink.id = "download_link";
+        downloadLink.style.display = "contents"; // don't affect layout
+        // Move the existing button(s) inside the bar into this anchor
+        // so the whole clickable area is a real link.
+        while (downloadBar.firstChild) {
+            downloadLink.appendChild(downloadBar.firstChild);
+        }
+        downloadBar.appendChild(downloadLink);
+    }
+
     // ---- Track the currently selected platform -----------------
     function getSelectedPlatform() {
         const activeBtn = platformToggle.querySelector(
@@ -39,10 +58,21 @@
         return (activeBtn && activeBtn.dataset.platform) || DEFAULT_PLATFORM;
     }
 
+    // ---- Keep the link's href pointed at the right file ----------
+    function updateDownloadLink() {
+        const platform = getSelectedPlatform();
+        const fileUrl = APP_FILES[platform];
+
+        if (!fileUrl) {
+            console.warn(`app_download.js: no file mapped for "${platform}"`);
+            downloadLink.removeAttribute("href");
+            return;
+        }
+
+        downloadLink.href = fileUrl;
+    }
+
     // ---- "Wait a second..." fade animation (Android only) -------
-    // Android APKs take a moment to prep/download, so we show a
-    // fade-in-out cue. Windows/Linux downloads start immediately,
-    // so no signal is needed for them.
     function triggerFadeOut() {
         if (!downloadingSignal) return;
         downloadingSignal.classList.remove("fade-in-out-active");
@@ -50,33 +80,16 @@
         downloadingSignal.classList.add("fade-in-out-active");
     }
 
-    // ---- Trigger a file download --------------------------------
-    function downloadApp(platform) {
-        const fileUrl = APP_FILES[platform];
+    // ---- Wire up platform switching to keep href fresh -----------
+    platformToggle.addEventListener("click", updateDownloadLink);
 
-        if (!fileUrl) {
-            console.warn(`app_download.js: no file mapped for "${platform}"`);
-            return;
-        }
-
-        triggerFadeOut();
-
-        // GitHub release assets are served from a different origin
-        // and already send Content-Disposition: attachment, so a
-        // plain link click is enough to trigger the download.
-        const link = document.createElement("a");
-        link.href = fileUrl;
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-    }
-
-    // ---- Wire up the "Get The App" button ------------------------
-    downloadBar.addEventListener("click", (event) => {
-        const button = event.target.closest("button");
-        if (!button) return;
-
-        const platform = getSelectedPlatform();
-        downloadApp(platform);
+    // ---- Show the fade cue on real click, don't block navigation -
+    downloadLink.addEventListener("click", () => {
+        if (getSelectedPlatform() === "android") triggerFadeOut();
+        // No preventDefault(): let the browser handle the anchor
+        // click natively, straight to its download manager.
     });
+
+    // ---- Set the initial href on page load ------------------------
+    updateDownloadLink();
 })();
